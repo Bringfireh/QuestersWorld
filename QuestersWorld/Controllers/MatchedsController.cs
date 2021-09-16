@@ -12,7 +12,7 @@ namespace QuestersWorld.Controllers
 {
     public class MatchedsController : Controller
     {
-        private QWModel db = new QWModel();
+        ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Matcheds
         public ActionResult Index()

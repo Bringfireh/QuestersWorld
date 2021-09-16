@@ -12,7 +12,7 @@ namespace QuestersWorld.Controllers
 {
     public class TransactionsController : Controller
     {
-        private QWModel db = new QWModel();
+        ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Transactions
         public ActionResult Index()
@@ -39,7 +39,7 @@ namespace QuestersWorld.Controllers
         // GET: Transactions/Create
         public ActionResult Create()
         {
-            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "FullName");
+            ViewBag.UserId = new SelectList(db.Users, "Id", "FullName");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace QuestersWorld.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "FullName", transaction.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "FullName", transaction.UserId);
             return View(transaction);
         }
 
@@ -73,7 +73,7 @@ namespace QuestersWorld.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "FullName", transaction.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "FullName", transaction.UserId);
             return View(transaction);
         }
 
@@ -90,7 +90,7 @@ namespace QuestersWorld.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "FullName", transaction.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "FullName", transaction.UserId);
             return View(transaction);
         }
 

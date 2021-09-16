@@ -31,6 +31,6 @@ namespace QuestersWorld.Models
         [Display(Name = "Date Answered")]
         public DateTime? DateTreated { get; set; }
 
-        public virtual AspNetUser AspNetUser { get; set; }
+        public virtual ApplicationUser AspNetUser { get; set; }
     }
 }

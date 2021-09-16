@@ -13,7 +13,7 @@ namespace QuestersWorld.Controllers
     public class CcController : Controller
     {
         // GET: Cc
-        private QWModel db = new QWModel();
+        ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
             if (User.Identity.IsAuthenticated)
@@ -35,23 +35,23 @@ namespace QuestersWorld.Controllers
         }
         public ActionResult Am()
         {
-            if (db.AspNetUsers.Where(u => u.UserName == User.Identity.Name).Select(u => u.ActiveStatus).FirstOrDefault() != "Active") return RedirectToAction("DeactivatedUser");
-            var user = db.AspNetUsers.ToList();
-            ViewBag.TotalUsers = db.AspNetUsers.Count();
+            if (db.Users.Where(u => u.UserName == User.Identity.Name).Select(u => u.ActiveStatus).FirstOrDefault() != "Active") return RedirectToAction("DeactivatedUser");
+            var user = db.Users.ToList();
+            ViewBag.TotalUsers = db.Users.Count();
             return View(user);
         }
         public ActionResult Pm()
         {
-            if (db.AspNetUsers.Where(u => u.UserName == User.Identity.Name).Select(u => u.ActiveStatus).FirstOrDefault() != "Active") return RedirectToAction("DeactivatedUser");
-            string idx = db.AspNetUsers.Where(u => u.UserName == User.Identity.Name).Select(u => u.Id).FirstOrDefault();
+            if (db.Users.Where(u => u.UserName == User.Identity.Name).Select(u => u.ActiveStatus).FirstOrDefault() != "Active") return RedirectToAction("DeactivatedUser");
+            string idx = db.Users.Where(u => u.UserName == User.Identity.Name).Select(u => u.Id).FirstOrDefault();
             var pHs = db.PHs.Where(p => p.UserId == idx).OrderBy(p => p.DateCreated);
             return View(pHs.ToList());
            
         }
         public ActionResult DeactivatedUser()
         {
-            if (db.AspNetUsers.Where(u => u.UserName == User.Identity.Name).Select(u => u.ActiveStatus).FirstOrDefault() == "Active") return RedirectToAction("Pm");
-            string idx = db.AspNetUsers.Where(u => u.UserName == User.Identity.Name).Select(u => u.Id).FirstOrDefault();
+            if (db.Users.Where(u => u.UserName == User.Identity.Name).Select(u => u.ActiveStatus).FirstOrDefault() == "Active") return RedirectToAction("Pm");
+            string idx = db.Users.Where(u => u.UserName == User.Identity.Name).Select(u => u.Id).FirstOrDefault();
             var userSupports = db.UserSupports.Where(u => u.UserId == idx);
             return View(userSupports.ToList());
         }

@@ -28,6 +28,6 @@ namespace QuestersWorld.Models
         [Display(Name = "Bank Name")]
         public string BankName { get; set; }
 
-        public virtual AspNetUser AspNetUser { get; set; }
+        public virtual ApplicationUser AspNetUser { get; set; }
     }
 }

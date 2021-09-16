@@ -12,7 +12,7 @@ namespace QuestersWorld.Controllers
 {
     public class SettingsController : Controller
     {
-        private QWModel db = new QWModel();
+        ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Settings
         public ActionResult Index()

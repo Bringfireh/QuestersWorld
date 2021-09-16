@@ -34,6 +34,6 @@ namespace QuestersWorld.Models
         [Display(Name = "Status")]
         public string Status { get; set; }
 
-        public virtual AspNetUser AspNetUser { get; set; }
+        public virtual ApplicationUser AspNetUser { get; set; }
     }
 }

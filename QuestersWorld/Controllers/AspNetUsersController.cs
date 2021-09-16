@@ -12,12 +12,12 @@ namespace QuestersWorld.Controllers
 {
     public class AspNetUsersController : Controller
     {
-        private QWModel db = new QWModel();
+        ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: AspNetUsers
         public ActionResult Index()
         {
-            var aspNetUsers = db.AspNetUsers.Include(a => a.UserAccount);
+            var aspNetUsers = db.Users.Include(a => a.UserAccount);
             return View(aspNetUsers.ToList());
         }
 
@@ -28,7 +28,7 @@ namespace QuestersWorld.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AspNetUser aspNetUser = db.AspNetUsers.Find(id);
+            ApplicationUser aspNetUser = db.Users.Find(id);
             if (aspNetUser == null)
             {
                 return HttpNotFound();
@@ -48,11 +48,11 @@ namespace QuestersWorld.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FullName,Address,Country,ActiveStatus,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] AspNetUser aspNetUser)
+        public ActionResult Create([Bind(Include = "Id,FullName,Address,Country,ActiveStatus,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] ApplicationUser aspNetUser)
         {
             if (ModelState.IsValid)
             {
-                db.AspNetUsers.Add(aspNetUser);
+                db.Users.Add(aspNetUser);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -68,7 +68,7 @@ namespace QuestersWorld.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AspNetUser aspNetUser = db.AspNetUsers.Find(id);
+            ApplicationUser aspNetUser = db.Users.Find(id);
             if (aspNetUser == null)
             {
                 return HttpNotFound();
@@ -82,7 +82,7 @@ namespace QuestersWorld.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FullName,Address,Country,ActiveStatus,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] AspNetUser aspNetUser)
+        public ActionResult Edit([Bind(Include = "Id,FullName,Address,Country,ActiveStatus,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] ApplicationUser aspNetUser)
         {
             if (ModelState.IsValid)
             {
@@ -101,7 +101,7 @@ namespace QuestersWorld.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AspNetUser aspNetUser = db.AspNetUsers.Find(id);
+            ApplicationUser aspNetUser = db.Users.Find(id);
             if (aspNetUser == null)
             {
                 return HttpNotFound();
@@ -114,8 +114,8 @@ namespace QuestersWorld.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            AspNetUser aspNetUser = db.AspNetUsers.Find(id);
-            db.AspNetUsers.Remove(aspNetUser);
+            ApplicationUser aspNetUser = db.Users.Find(id);
+            db.Users.Remove(aspNetUser);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

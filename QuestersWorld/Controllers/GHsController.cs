@@ -12,12 +12,12 @@ namespace QuestersWorld.Controllers
 {
     public class GHsController : Controller
     {
-        private QWModel db = new QWModel();
+        ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: GHs
         public ActionResult Index()
         {
-            string idx = db.AspNetUsers.Where(u => u.UserName == User.Identity.Name).Select(u => u.Id).FirstOrDefault();
+            string idx = db.Users.Where(u => u.UserName == User.Identity.Name).Select(u => u.Id).FirstOrDefault();
 
             var gHs = db.GHs.Where(g => g.UserId==idx).OrderBy(g =>g.DateCreated).Include(g => g.AspNetUser).Include(g=>g.Matcheds);
             return View(gHs.ToList());
@@ -49,7 +49,7 @@ namespace QuestersWorld.Controllers
         // GET: GHs/Create
         public ActionResult Create()
         {
-            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "FullName");
+            ViewBag.UserId = new SelectList(db.Users, "Id", "FullName");
             return View();
         }
 
@@ -67,7 +67,7 @@ namespace QuestersWorld.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "FullName", gH.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "FullName", gH.UserId);
             return View(gH);
         }
 
@@ -83,7 +83,7 @@ namespace QuestersWorld.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "FullName", gH.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "FullName", gH.UserId);
             return View(gH);
         }
 
@@ -100,7 +100,7 @@ namespace QuestersWorld.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "FullName", gH.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "FullName", gH.UserId);
             return View(gH);
         }
 

@@ -12,12 +12,12 @@ namespace QuestersWorld.Controllers
 {
     public class UserAccountsController : Controller
     {
-        private QWModel db = new QWModel();
+        ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: UserAccounts
         public ActionResult Index()
         {
-            string idx = db.AspNetUsers.Where(u => u.UserName == User.Identity.Name).Select(u => u.Id).FirstOrDefault();
+            string idx = db.Users.Where(u => u.UserName == User.Identity.Name).Select(u => u.Id).FirstOrDefault();
 
             var userAccounts = db.UserAccounts.Where(u => u.UserId == idx).Include(u => u.AspNetUser);
             //var userAccounts = db.UserAccounts.Include(u => u.AspNetUser);
@@ -42,7 +42,7 @@ namespace QuestersWorld.Controllers
         // GET: UserAccounts/Create
         public ActionResult Create()
         {
-            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "FullName");
+            ViewBag.UserId = new SelectList(db.Users, "Id", "FullName");
             return View();
         }
 
@@ -55,7 +55,7 @@ namespace QuestersWorld.Controllers
         {
             if (ModelState.IsValid)
             {
-                string idx = db.AspNetUsers.Where(u => u.UserName == User.Identity.Name).Select(u => u.Id).FirstOrDefault();
+                string idx = db.Users.Where(u => u.UserName == User.Identity.Name).Select(u => u.Id).FirstOrDefault();
                 if (db.UserAccounts.Find(idx) != null) return RedirectToAction("Index");
                 userAccount.UserId = idx;
                 db.UserAccounts.Add(userAccount);
@@ -63,7 +63,7 @@ namespace QuestersWorld.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "FullName", userAccount.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "FullName", userAccount.UserId);
             return View(userAccount);
         }
 
@@ -79,7 +79,7 @@ namespace QuestersWorld.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "FullName", userAccount.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "FullName", userAccount.UserId);
             return View(userAccount);
         }
 
@@ -96,7 +96,7 @@ namespace QuestersWorld.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "FullName", userAccount.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "FullName", userAccount.UserId);
             return View(userAccount);
         }
 

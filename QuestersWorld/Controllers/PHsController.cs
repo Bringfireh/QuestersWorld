@@ -12,12 +12,12 @@ namespace QuestersWorld.Controllers
 {
     public class PHsController : Controller
     {
-        private QWModel db = new QWModel();
+        ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: PHs
         public ActionResult Index()
         {
-            string idx = db.AspNetUsers.Where(u => u.UserName == User.Identity.Name).Select(u => u.Id).FirstOrDefault();
+            string idx = db.Users.Where(u => u.UserName == User.Identity.Name).Select(u => u.Id).FirstOrDefault();
             var pHs = db.PHs.Where(p=> p.UserId==idx).OrderBy(p => p.DateCreated).Include(p => p.AspNetUser);
             return View(pHs.ToList());
         }
@@ -67,7 +67,7 @@ namespace QuestersWorld.Controllers
         {
             if (ModelState.IsValid)
             {
-                string idx = db.AspNetUsers.Where(u => u.UserName == User.Identity.Name).Select(u => u.Id).FirstOrDefault();
+                string idx = db.Users.Where(u => u.UserName == User.Identity.Name).Select(u => u.Id).FirstOrDefault();
                 pH.ID = RandomString(16);
                 pH.UserId = idx;
                 pH.DateCreated = DateTime.Now.Date;
@@ -77,7 +77,7 @@ namespace QuestersWorld.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "FullName", pH.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "FullName", pH.UserId);
             return View(pH);
         }
 
@@ -93,7 +93,7 @@ namespace QuestersWorld.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "FullName", pH.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "FullName", pH.UserId);
             return View(pH);
         }
 
@@ -110,7 +110,7 @@ namespace QuestersWorld.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "FullName", pH.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "FullName", pH.UserId);
             return View(pH);
         }
 

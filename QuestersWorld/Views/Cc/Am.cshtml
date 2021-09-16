@@ -1,4 +1,4 @@
-﻿@model IEnumerable<QuestersWorld.Models.AspNetUser>
+﻿@model IEnumerable<QuestersWorld.Models.ApplicationUser>
 
 @{
     ViewBag.Title = "Am";
@@ -114,9 +114,9 @@
             @Html.DisplayFor(modelItem => item.UserName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
         </td>
     </tr>
 }

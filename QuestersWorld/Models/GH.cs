@@ -31,7 +31,7 @@ namespace QuestersWorld.Models
         [Display(Name = "Status")]
         public string Status { get; set; }
 
-        public virtual AspNetUser AspNetUser { get; set; }
+        public virtual ApplicationUser AspNetUser { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Matched> Matcheds { get; set; }
