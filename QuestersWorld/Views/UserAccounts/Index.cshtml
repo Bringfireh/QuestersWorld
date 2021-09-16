@@ -1,0 +1,57 @@
+﻿@model IEnumerable<QuestersWorld.Models.UserAccount>
+
+@{
+    ViewBag.Title = "My Account Information";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<h4>My Account Information | @Html.ActionLink("Add Account", "Create")</h4>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <tr>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.AspNetUser.FullName)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.AccountName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BankName)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.AspNetUser.FullName)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BankName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.UserId })
+
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

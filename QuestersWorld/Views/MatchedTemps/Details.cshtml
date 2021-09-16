@@ -1,0 +1,114 @@
+﻿@model QuestersWorld.Models.MatchedTemp
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MatchedTemp</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GH.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GH.UserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PH.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PH.UserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GHAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GHAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PHAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PHAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TimeCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimeCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpectedPaymentDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpectedPaymentDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpectedPaymentTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpectedPaymentTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaymentDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaymentTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageLink)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImageLink)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

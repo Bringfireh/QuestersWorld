@@ -1,0 +1,77 @@
+﻿@model IEnumerable<QuestersWorld.Models.GH>
+
+@{
+    ViewBag.Title = "My GHs";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<script type="text/javascript">
+    var GoDelete = function(ghvalue) {
+        if (confirm('Are you Sure you want to Delete this GH Request Information?') == true) {
+            frmDelete.ghdelete.value = ghvalue;
+            frmDelete.submit();
+        }
+        
+    }
+</script>
+<h4>My GHs | @Html.ActionLink("New GH", "Create")</h4>
+
+
+<div class="table-responsive">
+    <table>
+        @foreach (var item in Model)
+        {
+            <tr><td valign="bottom">
+                @foreach (var litem in item.Matcheds)
+                {
+                    <div style="background-color:purple;border-radius:15px 50px;border:2px solid;padding:20px;" id="@litem.ID">
+                        <center>Matched GH Request: @litem.GH.ID</center>
+                        PH Request: @litem.PHID <br />
+                        Participant: @Html.DisplayFor(modelItem => litem.PH.AspNetUser.FullName) <br /> Amount: @Html.DisplayFor(modelItem => litem.PHAmount) <br />
+                        Last date of Payment: @Html.DisplayFor(modelItem => litem.ExpectedPaymentDate) &nbsp;&nbsp;&nbsp;&nbsp; Payment Time Limit: @Html.DisplayFor(modelItem => litem.ExpectedPaymentTime) <br />
+                        @*@Html.DisplayFor(modelItem => litem.PaymentDate)  @Html.DisplayFor(modelItem => litem.PaymentTime)*@
+                        @if (litem.Status == "Paid")
+                    { <a href="/Uploads/@litem.ImageLink" style="text-decoration:none"><span class="glyphicon glyphicon-picture logo-small"></span></a>}
+                    else
+                    { <text>No Upload</text>} &nbsp;&nbsp;&nbsp;&nbsp; Status: @Html.DisplayFor(modelItem => litem.Status) <br />
+                    @if (litem.Status == "Paid")
+                    {
+                        <a href="#" onclick="GoConfirm('@litem.ID')" class="btn btn-default" >Confirm</a><text> &nbsp; &nbsp; &nbsp; &nbsp;</text> <a href="#" onclick="GoFlagFake('@litem.ID')" class="btn btn-danger" >Flag as Fake POP</a>
+                    }
+                </div>
+                }
+                </td>
+                <td valign="bottom">
+
+                    <div style="background-color:green;border-radius:15px 50px;border:2px solid;padding:20px;" id="@item.ID">
+
+                        @Html.DisplayName("GH Request Code") : @Html.DisplayFor(modelItem => item.ID) <br />
+
+                        @Html.DisplayNameFor(model => model.Amount) : @Html.DisplayFor(modelItem => item.Amount) <br />
+
+                        @Html.DisplayNameFor(model => model.DateCreated): @Html.DisplayFor(modelItem => item.DateCreated)
+
+                        <br />
+                        @if (item.Status == "Pending")
+                        {
+                            <text>Kindly be patient as the system will match you to be paid within 1-5 days</text>
+                        }
+                        <br />
+                        <a href="#" onclick="GoDelete('@item.ID')" class="btn btn-danger" >Delete</a>
+
+                    </div>
+                </td>
+            </tr>
+        }
+
+    </table>
+    </div>
+       
+<form name="frmDelete" method="post" action="/GHs/DeleteGH">
+    <input type="hidden" name="ghdelete" value="code" />
+</form>
+<form name="frmConfirm" method="post" action="">
+    <input type="hidden" name="ghconfirm" value="code" />
+</form>
+<form name="frmFlag" method="post" action="">
+    <input type="hidden" name="ghflagfake" value="code" />
+</form>

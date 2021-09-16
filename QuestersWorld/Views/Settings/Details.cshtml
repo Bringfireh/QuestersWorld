@@ -1,0 +1,50 @@
+﻿@model QuestersWorld.Models.Setting
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Setting</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PercentageInterest)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PercentageInterest)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReleaseDays)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReleaseDays)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentDays)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaymentDays)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserLimit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserLimit)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

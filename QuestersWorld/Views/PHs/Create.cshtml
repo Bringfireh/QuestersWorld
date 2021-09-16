@@ -1,0 +1,79 @@
+﻿@model QuestersWorld.Models.PH
+
+@{
+    ViewBag.Title = "New Donation";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<script type="text/javascript">
+    var goConfirm = function () {
+        if (confirm("Are you sure you can make payment when matched?") == true) {
+            frm.submit();
+        }
+    }
+</script>
+<h4>Provide Help</h4>
+<font color="red">
+    <h5>Quick questers guidline</h5>
+    You will be matched to payout between 1 - 5 days. <br />
+    You are expected to make payment within 48 hours after been matched. <br />
+    Do NOT pledge if you do not have money to create a quest.
+</font>
+<form name="frm" method="post" action="">
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h5>Please provide help with the amount you will be able to pay. Select the appropriate Amount you want to provide help with.</h5>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.ID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ID, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.UserId, "UserId", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("UserId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Amount, new SelectList(new List<Int32> { 10000, 20000, 40000, 60000, 80000, 100000 }), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.DateCreated, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DateCreated, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DateCreated, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="Make PH Request" class="btn btn-default" onclick="goConfirm()" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

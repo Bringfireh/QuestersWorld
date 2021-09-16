@@ -1,0 +1,47 @@
+﻿@model IEnumerable<QuestersWorld.Models.PH>
+
+@{
+    ViewBag.Title = "Pm";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+
+
+<table>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td valign="bottom">
+                @foreach (var litem in item.Matcheds)
+                {
+                    <div style="background-color:green;border-radius:15px 50px;border:2px solid;padding:20px;" id="@litem.ID">
+                        <center>You have been Matched. PH Request: @litem.PHID</center>
+                        GH Request: @litem.GHID <br />
+                        Participant: @litem.GH.AspNetUser.FullName <br /> Amount: @Html.DisplayFor(modelItem => litem.PHAmount) <br />
+                        @if (litem.GH.AspNetUser.UserAccount != null)
+                        {
+                            <text>
+                                Account Name: @litem.GH.AspNetUser.UserAccount.AccountName <br />
+                                Account Number: @litem.GH.AspNetUser.UserAccount.AccountNumber <br />
+                                Account Type: @litem.GH.AspNetUser.UserAccount.AccountType <br />
+                                Bank Name: @litem.GH.AspNetUser.UserAccount.BankName <br />
+                            </text>
+                        }
+
+                        Last date of Payment: @Html.DisplayFor(modelItem => litem.ExpectedPaymentDate) &nbsp;&nbsp;&nbsp;&nbsp; Payment Time Limit: @Html.DisplayFor(modelItem => litem.ExpectedPaymentTime) <br />
+                        @*@Html.DisplayFor(modelItem => litem.PaymentDate)  @Html.DisplayFor(modelItem => litem.PaymentTime)*@
+                        @if (litem.Status == "Paid")
+                    { <a href="/Uploads/@litem.ImageLink" style="text-decoration:none"><span class="glyphicon glyphicon-picture logo-small"></span></a>}
+                    else
+                    { <text>No Upload</text>} &nbsp;&nbsp;&nbsp;&nbsp; Status: @Html.DisplayFor(modelItem => litem.Status) <br />
+                    @if (litem.Status == "Paid")
+                    {
+                        <a href="#" onclick="GoConfirm('@litem.ID')" class="btn btn-default">Confirm</a><text> &nbsp; &nbsp; &nbsp; &nbsp;</text> 
+                    }
+                </div>
+                }
+            </td>
+           
+        </tr>
+    }
+</table>

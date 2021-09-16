@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/Images/quester.png" type="image/x-icon">
+    <title> Questers World - @ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script type="text/javascript">
+        var GoTrust = function () {
+            alert("Opps! Working on the Links.")
+        }
+    </script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/" style="text-decoration:none"><img src="/Images/quester.png" width="60" height="60" />QW</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                    <li><a @*href="@Url.Action("Index","SmileSettings")"*@ href="#" onclick="GoTrust()">Settings</a></li>
+
+                    <li><a @*href="@Url.Action("Index","Matching")"*@ href="#" onclick="GoTrust()">Daily Matching</a></li>
+                    <li><a @*href="@Url.Action("Index","PHs")"*@ href="#" onclick="GoTrust()">PH Report</a></li>
+                    <li><a @*href="@Url.Action("Index","GHs")"*@ href="#" onclick="GoTrust()">GH Report </a></li>
+                    <li><a @*href="@Url.Action("Index","Reports")"*@ href="#" onclick="GoTrust()">Reports </a></li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        <br />
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Questersworld.net</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

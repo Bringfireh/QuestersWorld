@@ -1,0 +1,61 @@
+﻿@model IEnumerable<QuestersWorld.Models.UserSupport>
+
+@{
+    ViewBag.Title = "Deactivated User";
+    Layout = "~/Views/Shared/_LayoutDeactivate.cshtml";
+}
+
+
+<h4>Support | @Html.ActionLink("New Support Ticket", "Create")</h4>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AspNetUser.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Complaint)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateCreated)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Remarks)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateTreated)
+            </th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AspNetUser.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Complaint)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateCreated)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Remarks)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateTreated)
+                </td>
+
+            </tr>
+        }
+
+    </table>
+</div>

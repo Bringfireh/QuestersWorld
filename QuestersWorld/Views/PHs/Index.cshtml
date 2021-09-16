@@ -1,0 +1,80 @@
+﻿@model IEnumerable<QuestersWorld.Models.PH>
+
+@{
+    ViewBag.Title = "My PH Requests";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<script type="text/javascript">
+    var GoDelete = function(phvalue) {
+        if (confirm('Are you Sure you want to Delete this PH Request Information?') == true) {
+            frmDelete.phdelete.value = phvalue;
+            frmDelete.submit();
+        }
+
+    }
+</script>
+<h4>My PH Requests | @Html.ActionLink("New Donation", "Create")</h4>
+
+
+
+<table>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td valign="bottom">
+                @foreach (var litem in item.Matcheds)
+                {
+                    <div style="background-color:green;border-radius:15px 50px;border:2px solid;padding:20px;" id="@litem.ID">
+                        <center>You have been Matched. PH Request: @litem.PHID</center>
+                        GH Request: @litem.GHID <br />
+                        Participant: @litem.GH.AspNetUser.FullName <br /> Amount: @Html.DisplayFor(modelItem => litem.PHAmount) <br />
+                        @if (litem.GH.AspNetUser.UserAccount!= null)
+                        {
+                        <text>
+                        Account Name: @litem.GH.AspNetUser.UserAccount.AccountName <br />
+                        Account Number: @litem.GH.AspNetUser.UserAccount.AccountNumber <br />
+                        Account Type: @litem.GH.AspNetUser.UserAccount.AccountType <br />
+                        Bank Name: @litem.GH.AspNetUser.UserAccount.BankName <br />
+                        </text>
+                        }
+                       
+                        Last date of Payment: @Html.DisplayFor(modelItem => litem.ExpectedPaymentDate) &nbsp;&nbsp;&nbsp;&nbsp; Payment Time Limit: @Html.DisplayFor(modelItem => litem.ExpectedPaymentTime) <br />
+                        @*@Html.DisplayFor(modelItem => litem.PaymentDate)  @Html.DisplayFor(modelItem => litem.PaymentTime)*@
+                        @if (litem.Status == "Paid")
+                    { <a href="/Uploads/@litem.ImageLink" style="text-decoration:none"><span class="glyphicon glyphicon-picture logo-small"></span></a>}
+                    else
+                    { <text>No Upload</text>} &nbsp;&nbsp;&nbsp;&nbsp; Status: @Html.DisplayFor(modelItem => litem.Status) <br />
+                    @if (litem.Status == "Paid")
+                    {
+                        <a href="#" onclick="GoConfirm('@litem.ID')" class="btn btn-default">Confirm</a><text> &nbsp; &nbsp; &nbsp; &nbsp;</text> <a href="#" onclick="GoFlagFake('@litem.ID')" class="btn btn-danger">Flag as Fake POP</a>
+                    }
+                </div>
+                }
+            </td>
+            <td valign="bottom">
+
+                <div style="background-color:purple;border-radius:15px 50px;border:2px solid;padding:20px;" id="@item.ID">
+
+                    @Html.DisplayName("PH Request Code") : @Html.DisplayFor(modelItem => item.ID) <br />
+
+                    @Html.DisplayNameFor(model => model.Amount) : @Html.DisplayFor(modelItem => item.Amount) <br />
+
+                    @Html.DisplayNameFor(model => model.DateCreated): @Html.DisplayFor(modelItem => item.DateCreated)
+
+                    <br />
+                    @if (item.Status == "Pending")
+                    {
+                        <text>Kindly be patient as you will be matched to pay within 1-5 days</text>
+                    }
+                    <br />
+                    <a href="#" onclick="GoDelete('@item.ID')" class="btn btn-danger">Delete</a>
+
+                </div>
+            </td>
+        </tr>
+    }
+
+</table>
+<form name="frmDelete" method="post" action="/PHs/DeletePH">
+    <input type="hidden" name="phdelete" value="code" />
+</form>
