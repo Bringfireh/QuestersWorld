@@ -5,14 +5,14 @@ namespace QuestersWorld.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<QuestersWorld.Models.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<QuestersWorld.Models.QWModel>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(QuestersWorld.Models.ApplicationDbContext context)
+        protected override void Seed(QuestersWorld.Models.QWModel context)
         {
             //  This method will be called after migrating to the latest version.
 

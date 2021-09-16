@@ -13,7 +13,7 @@ namespace QuestersWorld.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202109161612514_QW"; }
+            get { return "202109161621217_QW"; }
         }
         
         string IMigrationMetadata.Source
